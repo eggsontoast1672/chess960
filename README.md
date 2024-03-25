@@ -63,4 +63,9 @@ it will automatically generate the first position. After that, you can press
 
 ## License
 
-This is public domain software.
+The code for this project is 100% public domain.
+
+The images are licensed under CC BY-SA 3.0, see the license
+[here](https://creativecommons.org/licenses/by-sa/3.0/). The images were
+retrieved from
+[greenchess.net](https://greenchess.net/info.php?item=downloads).
