@@ -1,4 +1,3 @@
-#include <SDL2/SDL_keycode.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -6,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_rwops.h>
@@ -13,6 +13,7 @@
 #include <SDL2/SDL_video.h>
 
 #include "board.h"
+#include "logging.h"
 #include "piece.h"
 #include "position.h"
 
@@ -20,7 +21,7 @@ int main(void) {
   srand(time(NULL));
 
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    fprintf(stderr, "Failed to initialize SDL\n");
+    log_sdl_error("Failed to initialize SDL");
     return 1;
   }
 
@@ -28,7 +29,7 @@ int main(void) {
       SDL_CreateWindow("Occident", SDL_WINDOWPOS_UNDEFINED,
                        SDL_WINDOWPOS_UNDEFINED, 800, 800, SDL_WINDOW_SHOWN);
   if (window == NULL) {
-    fprintf(stderr, "Failed to create window\n");
+    log_sdl_error("Failed to create window");
     SDL_Quit();
     return 1;
   }
@@ -36,7 +37,7 @@ int main(void) {
   SDL_Renderer *renderer = SDL_CreateRenderer(
       window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (renderer == NULL) {
-    fprintf(stderr, "Failed to create renderer\n");
+    log_sdl_error("Failed to create renderer");
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 1;

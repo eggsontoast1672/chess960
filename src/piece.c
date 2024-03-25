@@ -1,4 +1,5 @@
 #include "piece.h"
+#include "logging.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -28,8 +29,7 @@ int load_piece_textures(SDL_Renderer *renderer) {
 
       piece_textures[color][type] = IMG_LoadTexture(renderer, file);
       if (piece_textures[color][type] == NULL) {
-        fprintf(stderr, "[ERROR] Failed to load texture '%s'\n", file);
-        fprintf(stderr, "[ERROR] %s\n", IMG_GetError());
+        log_sdl_error("Failed to load texture '%s'", file);
         return -1;
       }
     }
