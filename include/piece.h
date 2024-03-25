@@ -19,28 +19,8 @@ enum PieceType {
   PIECE_TYPE_COUNT,
 };
 
-struct Piece {
-  enum PieceColor color;
-  enum PieceType type;
-};
-
-extern struct Piece white_king;
-extern struct Piece white_queen;
-extern struct Piece white_bishop;
-extern struct Piece white_knight;
-extern struct Piece white_rook;
-extern struct Piece white_pawn;
-
-extern struct Piece black_king;
-extern struct Piece black_queen;
-extern struct Piece black_bishop;
-extern struct Piece black_knight;
-extern struct Piece black_rook;
-extern struct Piece black_pawn;
-
 extern SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT];
 
-void draw_piece(SDL_Renderer *renderer, struct Piece piece);
 void free_piece_textures(void);
 int load_piece_textures(SDL_Renderer *renderer);
 const char *piece_color_to_string(enum PieceColor color);

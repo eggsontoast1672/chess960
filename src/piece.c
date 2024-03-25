@@ -6,25 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 
-struct Piece black_bishop = {PIECE_COLOR_BLACK, PIECE_TYPE_BISHOP};
-struct Piece black_king = {PIECE_COLOR_BLACK, PIECE_TYPE_KING};
-struct Piece black_knight = {PIECE_COLOR_BLACK, PIECE_TYPE_KNIGHT};
-struct Piece black_pawn = {PIECE_COLOR_BLACK, PIECE_TYPE_PAWN};
-struct Piece black_queen = {PIECE_COLOR_BLACK, PIECE_TYPE_QUEEN};
-struct Piece black_rook = {PIECE_COLOR_BLACK, PIECE_TYPE_ROOK};
-
-struct Piece white_bishop = {PIECE_COLOR_WHITE, PIECE_TYPE_BISHOP};
-struct Piece white_king = {PIECE_COLOR_WHITE, PIECE_TYPE_KING};
-struct Piece white_knight = {PIECE_COLOR_WHITE, PIECE_TYPE_KNIGHT};
-struct Piece white_pawn = {PIECE_COLOR_WHITE, PIECE_TYPE_PAWN};
-struct Piece white_queen = {PIECE_COLOR_WHITE, PIECE_TYPE_QUEEN};
-struct Piece white_rook = {PIECE_COLOR_WHITE, PIECE_TYPE_ROOK};
-
 SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT] = {0};
-
-void draw_piece(SDL_Renderer *renderer, struct Piece piece) {
-  SDL_RenderCopy(renderer, piece_textures[piece.color][piece.type], NULL, NULL);
-}
 
 void free_piece_textures(void) {
   for (enum PieceColor color = 0; color < PIECE_COLOR_COUNT; ++color) {
