@@ -4,4 +4,4 @@ if [ ! -f build/compile_commands.json ]; then
     cmake -S . -B build
 fi
 
-cmake --build build && build/occident
+ninja -C build run
