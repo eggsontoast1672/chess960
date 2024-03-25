@@ -20,7 +20,7 @@ struct Piece white_pawn = {PIECE_COLOR_WHITE, PIECE_TYPE_PAWN};
 struct Piece white_queen = {PIECE_COLOR_WHITE, PIECE_TYPE_QUEEN};
 struct Piece white_rook = {PIECE_COLOR_WHITE, PIECE_TYPE_ROOK};
 
-static SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT];
+SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT] = {0};
 
 void draw_piece(SDL_Renderer *renderer, struct Piece piece) {
   SDL_RenderCopy(renderer, piece_textures[piece.color][piece.type], NULL, NULL);

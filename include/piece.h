@@ -38,6 +38,8 @@ extern struct Piece black_knight;
 extern struct Piece black_rook;
 extern struct Piece black_pawn;
 
+extern SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT];
+
 void draw_piece(SDL_Renderer *renderer, struct Piece piece);
 void free_piece_textures(void);
 int load_piece_textures(SDL_Renderer *renderer);
