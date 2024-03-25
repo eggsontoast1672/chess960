@@ -55,6 +55,12 @@ And finally, to run the executable, you can execute this command:
 $ build/chess960
 ```
 
+## Usage
+
+This is not a difficult piece of software to use. Once you run the executable,
+it will automatically generate the first position. After that, you can press
+`g` to generate a new position. That's all there is to it.
+
 ## License
 
 This is public domain software.
