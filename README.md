@@ -43,16 +43,11 @@ project to generate the build configuration:
 $ cmake -S . -B build
 ```
 
-Once the build configuration is generated, you can compile the code like so:
+Once the build configuration is generated, you can compile and run the code all
+at once by building the `run` target:
 
 ```bash
-$ make -C build
-```
-
-And finally, to run the executable, you can execute this command:
-
-```bash
-$ build/chess960
+$ cmake --build build --target run
 ```
 
 ## Usage
