@@ -2,8 +2,8 @@
 
 #include <SDL2/SDL_render.h>
 
-const float BOARD_WIDTH = 800.0f;
-const float BOARD_HEIGHT = 800.0f;
+const float BOARD_WIDTH = 600.0f;
+const float BOARD_HEIGHT = 600.0f;
 
 const float CELL_WIDTH = BOARD_WIDTH / 8.0f;
 const float CELL_HEIGHT = BOARD_HEIGHT / 8.0f;
