@@ -14,8 +14,8 @@ positions.
 ## Compiling
 
 Chess960 is written in pure C using the SDL2 library for graphics. In order to
-compile the program, you need a C compiler, the SDL2 development files,
-`pkg-config` (sorry Windows users), and `CMake`.
+compile the program, you need a C compiler, the SDL2 development files, the
+SDL2-image development files, `pkg-config` (sorry Windows users), and `CMake`.
 
 One quick note about the `run.sh` script: it will check to see whether or not a
 file called `compile_command.json` exists in a directory called `build`, and if
