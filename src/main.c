@@ -25,9 +25,9 @@ int main(void) {
     return 1;
   }
 
-  SDL_Window *window =
-      SDL_CreateWindow("Chess 960 Position Generator", SDL_WINDOWPOS_UNDEFINED,
-                       SDL_WINDOWPOS_UNDEFINED, BOARD_WIDTH, BOARD_HEIGHT, SDL_WINDOW_SHOWN);
+  SDL_Window *window = SDL_CreateWindow(
+      "Chess 960 Position Generator", SDL_WINDOWPOS_UNDEFINED,
+      SDL_WINDOWPOS_UNDEFINED, BOARD_WIDTH, BOARD_HEIGHT, SDL_WINDOW_SHOWN);
   if (window == NULL) {
     log_sdl_error("Failed to create window");
     SDL_Quit();
