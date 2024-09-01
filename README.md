@@ -14,41 +14,40 @@ positions.
 ## Compiling
 
 Chess960 is written in pure C using the SDL2 library for graphics. In order to
-compile the program, you need a C compiler, the SDL2 development files, the
-SDL2-image development files, `pkg-config` (sorry Windows users), and `CMake`.
+compile the program, you need the following programs:
 
-One quick note about the `run.sh` script: it will check to see whether or not a
-file called `compile_command.json` exists in a directory called `build`, and if
-that is not the case, it will generate the build configuration. That means that
-if you have not configured `CMake` to generate `compile_commands.json`, the run
-script will not work.
+- A C compiler
+- SDL2 development files
+- SDL2 image development files
+- A POSIX compliant shell
+- GNU Make
+- `pkg-config`
 
-### Method 1 (`compile_commands.json`)
+All of that is pretty standard. The reason why you need a POSIX compliant shell
+is that the `configure` script expects it. Fish users: you are free to try your
+luck, but there are no promises here that it will work.
 
-If you have configured `CMake` to generate `compile_commands.json`, you're in
-luck because this way is simpler. All you have to do is run the script `run.sh`
-while you are in the root of the project, and everything will be taken care of.
-
-```bash
-$ ./run.sh
-```
-
-### Method 2 (no `compile_commands.json`)
-
-If you haven't configured `CMake` to generate `compile_commands.json`, you can
-still set it up manually. Just run the following command in the root of the
-project to generate the build configuration:
+Building from source is easy as pie, just perform the classic GNU incantation
+(provided below). Bear in mind that if you are attempting to install to a
+directory that requires root permissions to modify, you will need to run `sudo
+make install`.
 
 ```bash
-$ cmake -S . -B build
+$ ./configure && make && make install
 ```
 
-Once the build configuration is generated, you can compile and run the code all
-at once by building the `run` target:
+If you'd like to install into a different directory such as `~/.local`, you
+can pass the `--prefix` flag to the configure script, supplying it the install
+prefix. For instance, if you wanted to install to `~/.local`, you would run the
+following command:
 
 ```bash
-$ cmake --build build --target run
+$ ./configure --prefix ${HOME}/.local && make && make install
 ```
+
+For more information regarding the GNU build system, refer to their
+documentation
+[here](https://www.gnu.org/software/automake/manual/html_node/index.html).
 
 ## Usage
 

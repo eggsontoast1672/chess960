@@ -1,2 +1,7 @@
-/.cache
-/build
+# clangd files
+.cache
+
+# GNU autotools build caching
+.deps
+autom4te.cache
+
