@@ -1,2 +1,7 @@
-/.cache
-/build
+# clangd generated files
+.cache
+
+# Premake generated files
+bin
+Makefile
+*.make
