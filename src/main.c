@@ -45,7 +45,7 @@ int main(void) {
 
   load_piece_textures(renderer);
 
-  struct Position position = generate_valid_position();
+  Position position = generate_valid_position();
 
   int window_should_close = 0;
   while (!window_should_close) {

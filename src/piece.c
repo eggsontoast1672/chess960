@@ -1,5 +1,4 @@
 #include "piece.h"
-#include "logging.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -7,48 +6,21 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 
-SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT] = {0};
+#include "asset.h"
+#include "util.h"
 
-void free_piece_textures(void) {
-  for (enum PieceColor color = 0; color < PIECE_COLOR_COUNT; ++color) {
-    for (enum PieceType type = 0; type < PIECE_TYPE_COUNT; ++type) {
-      if (piece_textures[color][type] != NULL) {
-        SDL_DestroyTexture(piece_textures[color][type]);
-      }
-    }
-  }
-}
-
-int load_piece_textures(SDL_Renderer *renderer) {
-  for (enum PieceColor color = 0; color < PIECE_COLOR_COUNT; ++color) {
-    for (enum PieceType type = 0; type < PIECE_TYPE_COUNT; ++type) {
-      char file[32];
-      const char *color_string = piece_color_to_string(color);
-      const char *type_string = piece_type_to_string(type);
-      sprintf(file, "../assets/%s-%s.png", color_string, type_string);
-
-      piece_textures[color][type] = IMG_LoadTexture(renderer, file);
-      if (piece_textures[color][type] == NULL) {
-        log_sdl_error("Failed to load texture '%s'", file);
-        return -1;
-      }
-    }
-  }
-  return 0;
-}
-
-const char *piece_color_to_string(enum PieceColor color) {
+static const char *piece_color_to_string(PieceColor color) {
   switch (color) {
   case PIECE_COLOR_BLACK:
     return "black";
   case PIECE_COLOR_WHITE:
     return "white";
-  case PIECE_COLOR_COUNT:
-    assert(0);
+  default:
+    return "";
   }
 }
 
-const char *piece_type_to_string(enum PieceType type) {
+const char *piece_type_to_string(PieceType type) {
   switch (type) {
   case PIECE_TYPE_BISHOP:
     return "bishop";
@@ -62,7 +34,36 @@ const char *piece_type_to_string(enum PieceType type) {
     return "queen";
   case PIECE_TYPE_ROOK:
     return "rook";
-  case PIECE_TYPE_COUNT:
-    assert(0);
+  default:
+    return "";
+  }
+}
+
+#define ASSET_NAME_MAX 64
+
+static char *get_asset_name(PieceColor color, PieceType type) {
+  char *asset_name = chess_allocate(ASSET_NAME_MAX, sizeof(char));
+  const char *color_string = piece_color_to_string(color);
+  const char *type_string = piece_type_to_string(type);
+  snprintf(asset_name, ASSET_NAME_MAX, "%s-%s.png", color_string, type_string);
+  return asset_name;
+}
+
+SDL_Texture *piece_textures[PIECE_COLOR_COUNT][PIECE_TYPE_COUNT] = {0};
+
+void free_piece_textures(void) {
+  for (PieceColor color = 0; color < PIECE_COLOR_COUNT; ++color) {
+    for (PieceType type = 0; type < PIECE_TYPE_COUNT; ++type) {
+      SDL_DestroyTexture(piece_textures[color][type]);
+    }
+  }
+}
+
+void load_piece_textures(SDL_Renderer *renderer) {
+  for (PieceColor color = 0; color < PIECE_COLOR_COUNT; ++color) {
+    for (PieceType type = 0; type < PIECE_TYPE_COUNT; ++type) {
+      char *asset_name = get_asset_name(color, type);
+      piece_textures[color][type] = load_asset(renderer, asset_name);
+    }
   }
 }
