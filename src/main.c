@@ -27,7 +27,8 @@ int main(void) {
 
   SDL_Window *window = SDL_CreateWindow(
       "Chess 960 Position Generator", SDL_WINDOWPOS_UNDEFINED,
-      SDL_WINDOWPOS_UNDEFINED, BOARD_WIDTH, BOARD_HEIGHT, SDL_WINDOW_SHOWN);
+      SDL_WINDOWPOS_UNDEFINED, (int)BOARD_WIDTH, (int)BOARD_HEIGHT,
+      SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
   if (window == NULL) {
     log_sdl_error("Failed to create window");
     SDL_Quit();
@@ -41,6 +42,13 @@ int main(void) {
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 1;
+  }
+
+  {
+    int window_width = 0;
+    int window_height = 0;
+    SDL_GetWindowSize(window, &window_width, &window_height);
+    update_board_layout(window_width, window_height);
   }
 
   load_piece_textures(renderer);
@@ -57,12 +65,18 @@ int main(void) {
           position = generate_valid_position();
         }
         break;
+      case SDL_WINDOWEVENT:
+        if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+          update_board_layout(event.window.data1, event.window.data2);
+        }
+        break;
       case SDL_QUIT:
         window_should_close = 1;
         break;
       }
     }
 
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
     SDL_RenderClear(renderer);
     draw_board(renderer);
     draw_position(renderer, &position);
